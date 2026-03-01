@@ -134,10 +134,11 @@ var RouteStatNameTest = suite.ConformanceTest{
 			gwAddr := GatewayAndTCPRoutesMustBeAccepted(t, suite.Client, &suite.TimeoutConfig, suite.ControllerName, NewGatewayRef(gwNN), routeNN)
 
 			tcpAncestorRef := gwapiv1.ParentReference{
-				Group:     gatewayapi.GroupPtr(gwapiv1.GroupName),
-				Kind:      gatewayapi.KindPtr(resource.KindGateway),
-				Namespace: gatewayapi.NamespacePtr(gwNN.Namespace),
-				Name:      gwapiv1.ObjectName(gwNN.Name),
+				Group:       gatewayapi.GroupPtr(gwapiv1.GroupName),
+				Kind:        gatewayapi.KindPtr(resource.KindGateway),
+				Namespace:   gatewayapi.NamespacePtr(gwNN.Namespace),
+				Name:        gwapiv1.ObjectName(gwNN.Name),
+				SectionName: gatewayapi.SectionNamePtr("tcp"),
 			}
 			BackendTrafficPolicyMustBeAccepted(t, suite.Client, types.NamespacedName{Name: "tcp-route-stat-name", Namespace: ns}, suite.ControllerName, tcpAncestorRef)
 
